@@ -13,6 +13,8 @@ After some hours of work, this was final result:
 
 Pretty cool, isn't it? :heart_eyes:
 
+To download the slides of the project in order to have a global overview you can click [here](https://github.com/keivan-amini/Automated-Grow-Box-for-mushrooms-project/raw/main/Automated%20GrowBox%20for%20Mushrooms%20-%20PDF.pdf).
+
 ## Tools required for the project
 * Arduino UNO
 * Breadbord, resistors, jumper wires
@@ -26,6 +28,10 @@ Pretty cool, isn't it? :heart_eyes:
 * 4,7 KΩ resistor
 * Power strip
 
-To download the slides of the project click here.
+Of course if you haven't it yet, you will need to install Arduino Software; detailed instructions for installation in popular operating systems can be found [here](https://github.com/arduino/Arduino).
 
+## What to do
+### Electronics
+
+First of all, you will need to connect the sensors to the Arduino UNO. The [DHT 11](https://www.mouser.com/datasheet/2/758/DHT11-Technical-Data-Sheet-Translated-Version-1143054.pdf) sensor allows us to measure the temperature and the humidity of an environment; it is composed by 4 pins as you can see in the following picture.
 
