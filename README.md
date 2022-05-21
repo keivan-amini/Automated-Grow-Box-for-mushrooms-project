@@ -13,4 +13,19 @@ After some hours of work, this was final result:
 
 Pretty cool, isn't it? :heart_eyes:
 
+## Tools required for the project
+* Arduino UNO
+* Breadbord, resistors, jumper wires
+* DHT11 sensor 
+* LCD display
+* 4-channel Relay
+* 4 led grow lights
+* Ultrasonic atomiser
+* Fan (optional: potentiometer)
+* Heat mat
+* 4,7 KΩ resistor
+* Power strip
+
+To download the slides of the project click here.
+
 
