@@ -33,7 +33,7 @@ Of course if you haven't it yet, you will need to install Arduino Software; deta
 ## What to do
 ### Electronics
 
-First of all, you will need to connect the sensors to the Arduino UNO. The [DHT 11](https://www.mouser.com/datasheet/2/758/DHT11-Technical-Data-Sheet-Translated-Version-1143054.pdf) sensor allows us to measure the temperature and the humidity of an environment and it is composed by 4 pins as you can see in the following picture:
+First of all, you will need to connect the low voltage sensors to the Arduino UNO. The [DHT 11](https://www.mouser.com/datasheet/2/758/DHT11-Technical-Data-Sheet-Translated-Version-1143054.pdf) sensor allows us to measure the temperature and the humidity of an environment and it is composed by 4 pins as you can see in the following picture:
 
 <p align="center">
   <img src="https://github.com/keivan-amini/Automated-Grow-Box-for-mushrooms-project/blob/main/sensorr-removebg-preview.png?raw=true" align="centre" height="200" width="200" alt="Grow Box"/>
@@ -45,7 +45,7 @@ Where the meaning of the different pins is given by:
 * **NC**: no connection (not used);
 * **GROUND**: connected to the ground of the circuit.
 
-As an example of the electronic connections you could just copy the electronics of the following picture, *but be careful: in the software implementation the pins connected are not the same!* Eventually, just remember to look and change some small parts of the main code.
+As an example of the electronic connections you could just copy the electronics of the following picture, *but be careful: in our software implementation the pins connected are not the same!* Eventually, just remember to look and change some small parts of the main code.
 
 <p align="center">
   <img src="https://github.com/keivan-amini/Automated-Grow-Box-for-mushrooms-project/blob/main/untitled_s_wZeH3bKRx2-removebg-preview.png?raw=true" align="centre"  alt="Grow Box"/>
@@ -59,7 +59,7 @@ In the next step we have to connect the LCD display. We used an 20x4 character d
 
 Often when we have to deal with displays in electronics, it is way more confortable to use libraries instead of coding everything by-hand. For this reason we implemeted the LCD display by using a library called `LiquidCrystal_I2C.h` for which you can install it from this simple [repository](https://github.com/fdebrabander/Arduino-LiquidCrystal-I2C-library). For the same reason we have used another library for the [DHT11](https://github.com/adidax/dht11).
 
-It is now time to consider the relay: an important tools when we have to deal with normal voltage electronics. We have used a 4-channel relay for which we have two different side:
+It is now time to consider the relay, an important device when we have to deal with "home" voltage electronics (220 V - 240 V). We have used a 4-channel relay for which we have two different side:
 
 **High voltage side**
 * NO: Normally Open
@@ -75,3 +75,25 @@ It is now time to consider the relay: an important tools when we have to deal wi
 * VCC
 
 We actually used Normally Open connections. That means, when we tell Arduino to output an HIGH signal the current will not flow. Otherwise, when we tell Arduino to output a LOW signal, the current will flow. I personally recommend this [guide](https://randomnerdtutorials.com/guide-for-relay-module-with-arduino/) for those who did not understand how a relay works.
+
+In the following photo you can see our original electronic connections:
+
+<p align="center">
+  <img src="https://github.com/keivan-amini/Automated-Grow-Box-for-mushrooms-project/blob/main/_C8A7097.jpg?raw=true" align="centre" height="400" width="550"  alt="Grow Box"/>
+</p>
+
+In this photo, the cable at the left coming from the bottom of the image is directly connected with the electric socket of the building (220 V). In this cable we can see a blue wire that represents the **phase** of the circuit, i.e. it transports 220 V. Instead, the brown wire represent the **neutral**, i.e. on this conductor the voltage tends to 0 V.
+We then created a parallel circuit in which 4 neutral wires go into the 4 Normally Open connections of the relay. Finally, we connected all the 4 Common channel of the relay (with the **phase** of the circuit) in a power strip.
+
+<p align="center">
+  <img src="https://github.com/keivan-amini/Automated-Grow-Box-for-mushrooms-project/blob/main/ciabatta.jpg?raw=true" align="centre" height="300" width="300" alt="Grow Box"/>
+</p>
+
+In this way, the relay could control the input voltage of the 4 electrical outlets of the power strip, like a switch! :grin: 
+
+In the 4 electrical outlets of the power strip, we have connected the atomiser, the fan, lights and the heat mat.
+The ultrasonic atomiser has the aim to produce vapor. This can be done by just putting the atomiser inside a water container, meanwhile the fan is meant to displace the vapore created from the water container to the case containing the mushrooms. To optimize this process we involved a plastic tube.
+
+<p align="center">
+  <img src="https://github.com/keivan-amini/Automated-Grow-Box-for-mushrooms-project/blob/main/images/_C8A7072.jpg?raw=true" align="centre" height="400" width="550" alt="Grow Box"/>
+</p>
