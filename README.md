@@ -1,8 +1,8 @@
 # Automated GrowBox for mushrooms project
 ## Overview
-The aim of this project is to implement an automated grow box for mushrooms using **Arduino**. The original idea has been designed by a collaboration between [PLAM Creative Studio](https://www.plamstudio.eu/) and [Phylor](https://www.phylor.it/), for the [PoliPolo](https://www.plamstudio.eu/polipolo/) Fab Lab, in which the grow box has been exposed from the 29<sup>th</sup> of April 2022 in the Laboratorio Aperto di Ferrara.
+The aim of this project is to implement an automated grow box for mushrooms using **Arduino**. The original idea has been designed by a collaboration between [PLAM Creative Studio](https://www.plamstudio.eu/) and [Phylor](https://www.phylor.it/), for the [PoliPolo](https://www.plamstudio.eu/polipolo/) Fab Lab, in which the grow box has been exposed from the 29<sup>th</sup> of April 2022 in the [Laboratorio Aperto di Ferrara](https://laboratorioapertoferrara.it/).
 
-I used this opportunity not only to gain experience but also to develop a project for the Electronics for Applied Physics' course in the University of Bologna. 
+I used this opportunity not only to gain experience but also to develop a project for the [Electronics for Applied Physics'](https://www.unibo.it/it/didattica/insegnamenti/insegnamento/2021/433563) course in the [University of Bologna](https://www.unibo.it/it). 
 
 After some hours of work, this was final result:
 
@@ -97,3 +97,46 @@ The ultrasonic atomiser has the aim to produce vapor. This can be done by just p
 <p align="center">
   <img src="https://github.com/keivan-amini/Automated-Grow-Box-for-mushrooms-project/blob/main/images/_C8A7072.jpg?raw=true" align="centre" height="400" width="550" alt="Grow Box"/>
 </p>
+
+Regarding the led lights, we just connected it to one of the electrical outlets of the power strip, and we did the same also for the other tools. We used a specialized led lights with a spectrum composed by white light (3000 K), blue (460 nm) and red (620 nm): the mostly absorbed bands by plants.
+
+<p align="center">
+  <img src="https://github.com/keivan-amini/Automated-Grow-Box-for-mushrooms-project/blob/main/_C8A7099.jpg?raw=true" align="centre" height="400" width="550" alt="Grow Box"/>
+</p>
+
+### Code
+
+It is possible to see the whole code for the automated grow box [here](https://github.com/keivan-amini/Automated-Grow-Box-for-mushrooms-project/blob/main/GrowBox.ino).
+First of all, we loaded the libraries related to the sensors and we defined constants related to the minimum percentage humidity and the minimum temperature for the mushrooms.
+Then, in the `void setup()` we setup the LCD display and we displayed the first message:
+<p align="center"> <b>
+    GROW BOX - PoliPolo
+    </b>
+</p>
+
+<p align="center"> <b>
+  PLAM and Phylor for
+    </b>
+</p>
+  
+ <p align="center"> <b>
+  LabAperto Ferrara
+    </b>
+</p>
+  
+<p align="center"> <b> 
+  PopUp 29 APR 2022
+  </b>
+</p>
+
+Then we defined the measured parameters with using the function `dht.readHumidity()` and the function `dht.readTemperature()` contained in this [library](https://github.com/adidax/dht11) that we have mentioned before. Finally we basically printed the measured themperature and the measured humidity on the LCD display with the function `lcd.print`.
+
+To control the electrical outlets we simply performed a `for` cycle for each of the 4 devices. For the atomizer and the fan, we simply ask to turn on them when the level of the humidity is too low (mushrooms like an environment with more than 80 % ho relative humidity). For the heat mat we ask to turn on the switch of the power strip when the temperature mesasured in the case of the mushroom is below 24 °C.
+Meanwhile, for the led light management we thought to reconstruct the light cycle given by the sun: so basically we tried to turn the lights on for 12 hours and then turn them off for the next 12 hours. With an [RTC sensor](https://www.electronicwings.com/sensors-modules/real-time-clock-rtc-ds1307-module#:~:text=Real%20Time%20Clock%20(RTC)%20is,sensor%20values%2C%20GPS%20coordinates%20etc.) everything could have been easier, more efficient and more accurated, but we hadn't one. For this reason we just used the function `millis` to define a variable called `myTime`. Starting withe the led lights turned on, if the variable `myTime` reaches the value of 43200000 (ms) it means 12 hours are passed and we can turn down lights. If then the variables reaches 86400000 (ms) it means 24 hours are passed from the first run of the code and we can impose the end of the loop with the function `interrupts ()`.
+With this implementation every day we add an error of 30 seconds.
+
+## Conclusion and Thanks
+I would like to thank guys from [PLAM Creative Studio](https://www.plamstudio.eu/) that gave me the opportunity to help them for this project, but also the [Laboratorio Aperto di Ferrara](https://laboratorioapertoferrara.it/) that gave us the location to work on this project.
+I also would like to thank [Giuseppe Baldazzi](https://www.unibo.it/sitoweb/giuseppe.baldazzi/en), the professor of Electronics for Applied Physics course that allowed me to use this project as an exam.
+
+See you for the next project! :blush:
